@@ -13,7 +13,7 @@ data class Exercise(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "exercise_id") val id: Int,
     @ColumnInfo(name = "exercise_name") val exerciseName: String,
-    @ColumnInfo(name="exercise_rep_length") val exerciseLength: Int, // time in ms
-    @ColumnInfo(name="rest_between_reps") val restTime: Int, // time in ms
+    @ColumnInfo(name = "exercise_rep_length") val exerciseLength: Int, // time in ms
+    @ColumnInfo(name = "rest_between_reps") val restTime: Int, // time in ms
     @ColumnInfo(name = "number_sets") val numSets: Int
 )
