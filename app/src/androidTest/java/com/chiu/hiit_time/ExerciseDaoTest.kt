@@ -47,4 +47,15 @@ class ExerciseDaoTest {
         Assert.assertEquals(allExercises[0], squatsExercise)
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun insertSameExerciseFails() = runBlocking {
+        val squatsExercise = Exercise(1, "squats", 10000, 5000, 2)
+        exerciseDao.insert(squatsExercise)
+        exerciseDao.insert(squatsExercise)
+        val allExercises = exerciseDao.getAllExercises().first()
+        // Only the first squatsExercise should have been inserted
+        Assert.assertEquals(allExercises.size, 1)
+    }
+
 }
