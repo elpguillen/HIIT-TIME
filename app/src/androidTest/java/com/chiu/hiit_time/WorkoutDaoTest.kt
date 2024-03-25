@@ -47,10 +47,22 @@ class WorkoutDaoTest {
     }
 
     @Test
-    @Throws(IOException::class)
+    @Throws(Exception::class)
     fun insertWorkoutToDB() = runBlocking {
         addWorkoutToDb(workoutPushUp)
         val allWorkouts = workoutDao.getAllWorkouts().first()
         Assert.assertEquals(allWorkouts[0], workoutPushUp)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertSameWorkoutFails() = runBlocking {
+        addWorkoutToDb(workoutPushUp)
+        addWorkoutToDb(workoutPushUp)
+        addWorkoutToDb(workoutHiit)
+        val allWorkouts = workoutDao.getAllWorkouts().first()
+        // 1st and 3rd  call to addWorkoutToDb should have inserted a workout
+        // to database while 2nd call should fail since same workout as 1st call
+        Assert.assertEquals(allWorkouts.size, 2)
     }
 }

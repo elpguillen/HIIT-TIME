@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface WorkoutDao {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(workout: Workout)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
