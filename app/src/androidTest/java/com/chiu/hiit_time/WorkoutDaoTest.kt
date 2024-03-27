@@ -29,6 +29,10 @@ class WorkoutDaoTest {
         workoutDao.insert(workout)
     }
 
+    private suspend fun addWorkoutListToDb(workoutList: List<Workout>) {
+        workoutDao.insert(workoutList)
+    }
+
     @Before
     fun createDb() {
         val context: Context = ApplicationProvider.getApplicationContext()
@@ -64,5 +68,56 @@ class WorkoutDaoTest {
         // 1st and 3rd  call to addWorkoutToDb should have inserted a workout
         // to database while 2nd call should fail since same workout as 1st call
         Assert.assertEquals(allWorkouts.size, 2)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertWorkoutListToDB() = runBlocking {
+        val workouts = listOf(workoutPushUp, workoutHiit, workoutJog)
+        addWorkoutListToDb(workouts)
+        val allWorkouts = workoutDao.getAllWorkouts().first()
+        Assert.assertEquals(allWorkouts.size, workouts.size)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertUniqueWorkoutsInListToDB() = runBlocking {
+        val workouts = listOf(workoutPushUp, workoutPushUp, workoutHiit, workoutHiit, workoutJog)
+        val uniqueWorkouts = workouts.distinct()
+        addWorkoutListToDb(workouts)
+        val allWorkouts = workoutDao.getAllWorkouts().first()
+        Assert.assertEquals(allWorkouts.size, uniqueWorkouts.size)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun deleteExistingWorkoutInDB() = runBlocking {
+        addWorkoutToDb(workoutHiit)
+        val workoutsAfterInsert = workoutDao.getAllWorkouts().first()
+        Assert.assertEquals(workoutsAfterInsert.size, 1)
+
+        workoutDao.delete(workoutHiit)
+        val workoutsAfterDeletion = workoutDao.getAllWorkouts().first()
+        Assert.assertEquals(workoutsAfterDeletion.size, 0)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun updateExistingWorkoutInDB() = runBlocking {
+        val workout = Workout(1, "max interval")
+        val updatedWorkout = Workout(1, "sprints")
+        addWorkoutToDb(workout)
+        val workoutsAfterInsert = workoutDao.getAllWorkouts().first()
+        val initialWorkoutInserted = workoutsAfterInsert[0]
+        Assert.assertEquals(workoutsAfterInsert.size, 1)
+        Assert.assertEquals(initialWorkoutInserted.id, workout.id)
+        Assert.assertEquals(initialWorkoutInserted.name, workout.name)
+
+        workoutDao.update(updatedWorkout)
+        val workoutsAfterUpdate = workoutDao.getAllWorkouts().first()
+        val workoutAfterUpdate = workoutsAfterUpdate[0]
+        Assert.assertEquals(workoutsAfterUpdate.size, 1)
+        Assert.assertEquals(workoutAfterUpdate.id, updatedWorkout.id)
+        Assert.assertEquals(workoutAfterUpdate.name, updatedWorkout.name)
     }
 }
