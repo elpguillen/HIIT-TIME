@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.chiu.hiit_time.ui.home.HomeDestination
+import com.chiu.hiit_time.ui.home.HomeScreen
 
 /**
  *  Provides Navigation graph for the application
@@ -20,6 +21,8 @@ fun HiitNavHost(
         startDestination = HomeDestination.route,
         modifier = Modifier
     ) {
-
+        composable(route = HomeDestination.route) {
+            HomeScreen(navigateToItemScreen = {}, modifier = modifier)
+        }
     }
 }
