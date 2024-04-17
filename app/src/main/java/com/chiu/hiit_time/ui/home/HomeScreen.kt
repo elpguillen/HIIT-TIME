@@ -24,7 +24,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.chiu.hiit_time.R
 import com.chiu.hiit_time.ui.AppViewModelProvider
+import com.chiu.hiit_time.ui.navigation.NavigationDestination
 import com.chiu.hiit_time.ui.theme.HIITTIMETheme
+
+object HomeDestination: NavigationDestination {
+    override val route: String = "home"
+    override val titleRes: Int = R.string.app_name
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
