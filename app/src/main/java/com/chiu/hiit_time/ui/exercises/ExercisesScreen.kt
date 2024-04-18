@@ -29,7 +29,13 @@ import androidx.lifecycle.ViewModel
 import com.chiu.hiit_time.R
 import com.chiu.hiit_time.data.entities.Exercise
 import com.chiu.hiit_time.ui.AppViewModelProvider
+import com.chiu.hiit_time.ui.navigation.NavigationDestination
 import com.chiu.hiit_time.ui.theme.HIITTIMETheme
+
+object ExercisesDestination : NavigationDestination {
+    override val route = "exercises"
+    override val titleRes = R.string.exercise_title
+}
 
 @Composable
 fun ExercisesScreen(

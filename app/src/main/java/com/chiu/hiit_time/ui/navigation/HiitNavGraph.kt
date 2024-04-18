@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.chiu.hiit_time.ui.exercises.ExercisesDestination
+import com.chiu.hiit_time.ui.exercises.ExercisesScreen
 import com.chiu.hiit_time.ui.home.HomeDestination
 import com.chiu.hiit_time.ui.home.HomeScreen
 
@@ -23,6 +25,9 @@ fun HiitNavHost(
     ) {
         composable(route = HomeDestination.route) {
             HomeScreen(navigateToItemScreen = {}, modifier = modifier)
+        }
+        composable(route = ExercisesDestination.route) {
+            ExercisesScreen(modifier = modifier)
         }
     }
 }

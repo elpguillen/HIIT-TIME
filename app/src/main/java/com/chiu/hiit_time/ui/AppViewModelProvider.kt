@@ -2,6 +2,7 @@ package com.chiu.hiit_time.ui
 
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.chiu.hiit_time.ui.exercises.ExercisesViewModel
 import com.chiu.hiit_time.ui.home.HomeViewModel
 
 /**
@@ -12,6 +13,10 @@ object AppViewModelProvider {
 
         initializer {
             HomeViewModel()
+        }
+
+        initializer {
+            ExercisesViewModel()
         }
     }
 }

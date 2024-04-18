@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HIIT-TIME</string>
     <string name="exercise_entry_title">Add Exercise</string>
+    <string name="exercise_title">Exercises</string>
 </resources>
