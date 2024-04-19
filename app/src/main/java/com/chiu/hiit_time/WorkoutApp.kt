@@ -8,6 +8,6 @@ import androidx.navigation.compose.rememberNavController
 import com.chiu.hiit_time.ui.navigation.HiitNavHost
 
 @Composable
-fun WorkoutApp(navController: NavHostController = rememberNavController()) {
-    HiitNavHost(navController = navController)
+fun WorkoutApp(navController: NavHostController = rememberNavController(), mainMenuItems: List<String>) {
+    HiitNavHost(navController = navController, homeMenuItems = mainMenuItems)
 }

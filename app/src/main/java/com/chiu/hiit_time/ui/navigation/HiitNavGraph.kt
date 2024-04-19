@@ -16,6 +16,7 @@ import com.chiu.hiit_time.ui.home.HomeScreen
 @Composable
 fun HiitNavHost(
     navController: NavHostController,
+    homeMenuItems: List<String>,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -26,7 +27,9 @@ fun HiitNavHost(
         composable(route = HomeDestination.route) {
             HomeScreen(
                 navigateToItemScreen = {
-                    navController.navigate(it.lowercase())
+                    if (it == "Exercises") {
+                        navController.navigate(it.lowercase())
+                    }
                 },
                 modifier = modifier
             )
