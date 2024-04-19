@@ -40,7 +40,7 @@ object ExercisesDestination : NavigationDestination {
 @Composable
 fun ExercisesScreen(
     modifier: Modifier,
-    viewModel: ViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: ExercisesViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
 ) {
     Scaffold(
         floatingActionButton = {

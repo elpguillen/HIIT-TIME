@@ -24,7 +24,12 @@ fun HiitNavHost(
         modifier = Modifier
     ) {
         composable(route = HomeDestination.route) {
-            HomeScreen(navigateToItemScreen = {}, modifier = modifier)
+            HomeScreen(
+                navigateToItemScreen = {
+                    navController.navigate(it.lowercase())
+                },
+                modifier = modifier
+            )
         }
         composable(route = ExercisesDestination.route) {
             ExercisesScreen(modifier = modifier)
