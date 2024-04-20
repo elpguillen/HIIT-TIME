@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -42,6 +43,13 @@ fun ExercisesScreen(
     modifier: Modifier,
     viewModel: ExercisesViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
 ) {
+
+    val exercises: List<Exercise> = listOf(
+        Exercise(1, "squats", 1000, 1000, 5),
+        Exercise(2, "lunge", 2000, 1000, 10),
+        Exercise(3, "hip thrust", 3000, 1000, 15)
+    )
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -58,7 +66,7 @@ fun ExercisesScreen(
     ) {
         innerPadding ->
         ExercisesBody(
-            exercises = listOf(),
+            exercises = exercises,
             onItemClick = {},
             modifier = Modifier
                 .padding(innerPadding)
