@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.chiu.hiit_time.ui.exercises.ExerciseEntryDestination
+import com.chiu.hiit_time.ui.exercises.ExerciseEntryScreen
 import com.chiu.hiit_time.ui.exercises.ExercisesDestination
 import com.chiu.hiit_time.ui.exercises.ExercisesScreen
 import com.chiu.hiit_time.ui.home.HomeDestination
@@ -36,6 +38,13 @@ fun HiitNavHost(
         }
         composable(route = ExercisesDestination.route) {
             ExercisesScreen(modifier = modifier)
+        }
+
+        composable(route = ExerciseEntryDestination.route) {
+            ExerciseEntryScreen(
+                navigateBack = { navController.popBackStack() },
+                onNavigateUp = { navController.navigateUp() }
+            )
         }
     }
 }

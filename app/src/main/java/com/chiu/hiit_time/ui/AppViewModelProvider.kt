@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.chiu.hiit_time.WorkoutApplication
+import com.chiu.hiit_time.ui.exercises.ExerciseEntryViewModel
 import com.chiu.hiit_time.ui.exercises.ExercisesViewModel
 import com.chiu.hiit_time.ui.home.HomeViewModel
 
@@ -19,9 +20,11 @@ object AppViewModelProvider {
         }
 
         initializer {
-            ExercisesViewModel(
-                workoutApplication().container.exerciseRepository
-            )
+            ExercisesViewModel(workoutApplication().container.exerciseRepository)
+        }
+
+        initializer {
+            ExerciseEntryViewModel(workoutApplication().container.exerciseRepository)
         }
     }
 }
