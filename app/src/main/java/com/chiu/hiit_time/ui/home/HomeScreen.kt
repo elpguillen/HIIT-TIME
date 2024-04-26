@@ -20,8 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.chiu.hiit_time.HiitTopAppBar
 import com.chiu.hiit_time.R
 import com.chiu.hiit_time.ui.AppViewModelProvider
 import com.chiu.hiit_time.ui.navigation.NavigationDestination
@@ -44,7 +46,14 @@ fun HomeScreen(
     Scaffold(
         modifier = Modifier
             .padding(top = 20.dp)
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            HiitTopAppBar(
+                title = stringResource(HomeDestination.titleRes),
+                canNavigateBack = false,
+                scrollBehavior = scrollBehavior
+            )
+        }
     ) {innerPadding ->
         HomeBody(
             menuList = listOf("Timer", "Exercises", "Workouts"),

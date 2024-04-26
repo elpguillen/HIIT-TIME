@@ -37,7 +37,10 @@ fun HiitNavHost(
             )
         }
         composable(route = ExercisesDestination.route) {
-            ExercisesScreen(modifier = modifier)
+            ExercisesScreen(
+                navigateToExerciseEntry = { navController.navigate(ExerciseEntryDestination.route) },
+                modifier = modifier
+            )
         }
 
         composable(route = ExerciseEntryDestination.route) {

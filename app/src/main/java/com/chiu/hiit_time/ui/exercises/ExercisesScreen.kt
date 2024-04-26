@@ -41,6 +41,7 @@ object ExercisesDestination : NavigationDestination {
 @Composable
 fun ExercisesScreen(
     modifier: Modifier,
+    navigateToExerciseEntry: () -> Unit,
     viewModel: ExercisesViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
 ) {
 
@@ -53,7 +54,7 @@ fun ExercisesScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {  },
+                onClick = navigateToExerciseEntry,
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
             ) {
