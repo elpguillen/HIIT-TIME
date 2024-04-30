@@ -3,7 +3,10 @@ package com.chiu.hiit_time.ui.exercises
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
@@ -15,6 +18,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -25,6 +29,8 @@ import com.chiu.hiit_time.R
 import com.chiu.hiit_time.ui.AppViewModelProvider
 import com.chiu.hiit_time.ui.navigation.NavigationDestination
 import com.chiu.hiit_time.ui.theme.HIITTIMETheme
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 object ExerciseEntryDestination : NavigationDestination {
     override val route = "exercise_entry"
@@ -39,6 +45,8 @@ fun ExerciseEntryScreen(
     canNavigateBack: Boolean = true,
     viewModel: ExerciseEntryViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             HiitTopAppBar(
@@ -48,12 +56,28 @@ fun ExerciseEntryScreen(
             )
         }
     ) { innerPadding ->
-        ExerciseEntryBody(modifier = Modifier.padding(innerPadding))
+        ExerciseEntryBody(
+            exerciseUiState = viewModel.exerciseUiState,
+            onItemValueChange = viewModel::updateUiState,
+            onSaveClick = {
+                coroutineScope.launch {
+                    //viewModel.saveExercise()
+                    navigateBack()
+                }
+            },
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth()
+        )
     }
 }
 
 @Composable
 fun ExerciseEntryBody(
+    exerciseUiState: ExerciseItemUiState,
+    onItemValueChange: (ExerciseDetails) -> Unit,
+    onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -62,7 +86,7 @@ fun ExerciseEntryBody(
         ExerciseInputForm(modifier)
         
         Button(
-            onClick = {  },
+            onClick = { onSaveClick() },
         ) {
             Text(text = stringResource(id = R.string.save_action_button))
         }
