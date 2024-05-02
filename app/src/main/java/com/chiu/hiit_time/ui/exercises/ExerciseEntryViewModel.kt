@@ -52,10 +52,6 @@ data class ExerciseItemUiState(
     val isEntryValid: Boolean = false
 )
 
-/**
- * exerciseLength should be in ms
- * restTime should be in ms
- */
 data class ExerciseDetails(
     val id: Int = 0,
     val exerciseName: String = "",

@@ -2,6 +2,10 @@
     <string name="app_name">HIIT-TIME</string>
     <string name="back_button">Back</string>
     <string name="exercise_entry_title">Add Exercise</string>
+    <string name="exercise_duration_label">Exercise Duration*</string>
+    <string name="exercise_name_label">Exercise Name*</string>
+    <string name="exercise_rep_amount_label"># Reps*</string>
+    <string name="exercise_rest_duration_label">Rest Duration*</string>
     <string name="exercise_title">Exercises</string>
     <string name="route_home">home</string>
     <string name="route_exercises">exercises</string>

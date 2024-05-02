@@ -3,6 +3,7 @@ package com.chiu.hiit_time.ui.exercises
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -15,6 +16,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -83,8 +85,12 @@ fun ExerciseEntryBody(
     Column(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
-        ExerciseInputForm(modifier)
-        
+        ExerciseInputForm(
+            exerciseDetails = exerciseUiState.exerciseDetails,
+            modifier,
+            onValueChange = onItemValueChange
+        )
+
         Button(
             onClick = { onSaveClick() },
         ) {
@@ -95,42 +101,65 @@ fun ExerciseEntryBody(
 
 @Composable
 fun ExerciseInputForm(
-    modifier: Modifier = Modifier
+    exerciseDetails: ExerciseDetails,
+    modifier: Modifier = Modifier,
+    onValueChange: (ExerciseDetails) -> Unit = {},
+    enabled: Boolean = true
 ) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         OutlinedTextField(
-            value = "Enter Exercise: ",
-            onValueChange = {},
-            singleLine = true
+            value = exerciseDetails.exerciseName,
+            onValueChange = { onValueChange(exerciseDetails.copy(exerciseName = it))},
+            label = { Text(text = stringResource(id = R.string.exercise_name_label))},
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            singleLine = true,
+            enabled = enabled
         )
 
         OutlinedTextField(
-            value = "Enter Minutes: ",
-            onValueChange = {},
-            singleLine = true
+            value = exerciseDetails.exerciseLength,
+            onValueChange = { onValueChange(exerciseDetails.copy(exerciseLength = it))},
+            label = { Text(text = stringResource(id = R.string.exercise_duration_label))},
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            singleLine = true,
+            enabled = enabled
         )
 
         OutlinedTextField(
-            value = "Enter Seconds: ",
-            onValueChange = {},
-            singleLine = true
+            value = exerciseDetails.restTime,
+            onValueChange = { onValueChange(exerciseDetails.copy(restTime = it))},
+            label = { Text(text = stringResource(id = R.string.exercise_duration_label))},
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            singleLine = true,
+            enabled = enabled
         )
 
         OutlinedTextField(
-            value = "Enter # of repetitions: ",
-            onValueChange = {},
-            singleLine = true
+            value = exerciseDetails.numSets,
+            onValueChange = { onValueChange(exerciseDetails.copy(numSets = it))},
+            label = { Text(text = stringResource(id = R.string.exercise_rep_amount_label))},
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            singleLine = true,
+            enabled = enabled
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewExerciseInputForm() {
-    HIITTIMETheme {
-        ExerciseInputForm()
     }
 }
