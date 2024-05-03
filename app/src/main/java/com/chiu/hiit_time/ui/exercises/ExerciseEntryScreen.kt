@@ -63,7 +63,7 @@ fun ExerciseEntryScreen(
             onItemValueChange = viewModel::updateUiState,
             onSaveClick = {
                 coroutineScope.launch {
-                    //viewModel.saveExercise()
+                    viewModel.saveExercise()
                     navigateBack()
                 }
             },
@@ -139,7 +139,7 @@ fun ExerciseInputForm(
         OutlinedTextField(
             value = exerciseDetails.restTime,
             onValueChange = { onValueChange(exerciseDetails.copy(restTime = it))},
-            label = { Text(text = stringResource(id = R.string.exercise_duration_label))},
+            label = { Text(text = stringResource(id = R.string.exercise_rest_duration_label))},
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
