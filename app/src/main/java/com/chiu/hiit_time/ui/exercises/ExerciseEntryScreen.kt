@@ -124,8 +124,8 @@ fun ExerciseInputForm(
         )
 
         OutlinedTextField(
-            value = exerciseDetails.exerciseLength,
-            onValueChange = { onValueChange(exerciseDetails.copy(exerciseLength = it))},
+            value = exerciseDetails.exerciseHours,
+            onValueChange = { onValueChange(exerciseDetails.copy(exerciseHours = it))},
             label = { Text(text = stringResource(id = R.string.exercise_duration_label))},
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,

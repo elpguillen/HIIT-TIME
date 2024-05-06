@@ -129,7 +129,7 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
             Column(
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(text = "Timer: ${exercise.exerciseLength.toString()}")
+                Text(text = "Timer: ${exercise.exerciseHours.toString()}")
                 Text(text = "Break: ${exercise.restTime.toString()}")
             }
         }
