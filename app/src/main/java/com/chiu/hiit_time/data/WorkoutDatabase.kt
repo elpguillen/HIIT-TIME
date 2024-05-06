@@ -11,7 +11,7 @@ import com.chiu.hiit_time.data.entities.Exercise
 import com.chiu.hiit_time.data.entities.Workout
 import com.chiu.hiit_time.data.entities.WorkoutExercise
 
-@Database(entities = [Exercise::class, Workout::class, WorkoutExercise::class], version = 1, exportSchema = false)
+@Database(entities = [Exercise::class, Workout::class, WorkoutExercise::class], version = 1, exportSchema = true)
 abstract class WorkoutDatabase : RoomDatabase() {
     abstract fun exerciseDao(): ExerciseDao
     abstract fun workoutDao(): WorkoutDao
