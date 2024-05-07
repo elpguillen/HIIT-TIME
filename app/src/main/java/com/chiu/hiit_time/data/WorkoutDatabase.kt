@@ -16,13 +16,17 @@ import com.chiu.hiit_time.data.entities.WorkoutExercise
 
 @Database(
     entities = [Exercise::class, Workout::class, WorkoutExercise::class],
-    version = 2,
+    version = 3,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(
             from = 1,
             to = 2,
             spec = WorkoutDatabase.Migration2To3::class
+        ),
+        AutoMigration(
+            from = 2,
+            to = 3,
         )
     ]
 )
