@@ -126,7 +126,33 @@ fun ExerciseInputForm(
         OutlinedTextField(
             value = exerciseDetails.exerciseHours,
             onValueChange = { onValueChange(exerciseDetails.copy(exerciseHours = it))},
-            label = { Text(text = stringResource(id = R.string.exercise_duration_label))},
+            label = { Text(text = stringResource(id = R.string.exercise_hours_label))},
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            singleLine = true,
+            enabled = enabled
+        )
+
+        OutlinedTextField(
+            value = exerciseDetails.exerciseMinutes,
+            onValueChange = { onValueChange(exerciseDetails.copy(exerciseMinutes = it)) },
+            label = { Text(text = stringResource(id = R.string.exercise_minutes_label)) },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            singleLine = true,
+            enabled = enabled
+        )
+
+        OutlinedTextField(
+            value = exerciseDetails.exerciseSeconds,
+            onValueChange = { onValueChange(exerciseDetails.copy(exerciseSeconds = it)) },
+            label = { Text(text = stringResource(id = R.string.exercise_seconds_label)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
