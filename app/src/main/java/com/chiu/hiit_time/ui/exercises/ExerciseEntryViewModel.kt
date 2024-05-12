@@ -33,7 +33,7 @@ class ExerciseEntryViewModel(private val exerciseRepo: ExerciseRepo) : ViewModel
     private fun validateInput(uiState: ExerciseDetails = exerciseUiState.exerciseDetails): Boolean {
         return with(uiState) {
             exerciseName.isNotBlank() && exerciseHours.isNotBlank() &&
-                    restTime.isNotBlank() && numSets.isNotBlank()
+                    restMinutes.isNotBlank() && numSets.isNotBlank()
         }
     }
 
@@ -58,7 +58,7 @@ data class ExerciseDetails(
     val exerciseHours: String = "",
     val exerciseMinutes: String = "",
     val exerciseSeconds: String = "",
-    val restTime: String = "",
+    val restMinutes: String = "",
     val numSets: String = ""
 )
 
@@ -72,7 +72,7 @@ fun ExerciseDetails.toExercise() : Exercise = Exercise(
     exerciseHours = exerciseHours.toIntOrNull() ?: 0,
     exerciseMinutes = exerciseMinutes.toIntOrNull() ?: 0,
     exerciseSeconds = exerciseSeconds.toIntOrNull() ?: 0,
-    restTime = restTime.toIntOrNull() ?: 0,
+    restMinutes = restMinutes.toIntOrNull() ?: 0,
     numSets = numSets.toIntOrNull() ?: 0
 )
 
@@ -82,6 +82,6 @@ fun Exercise.toExerciseDetails(): ExerciseDetails = ExerciseDetails(
     exerciseHours = exerciseHours.toString(),
     exerciseMinutes = exerciseMinutes.toString(),
     exerciseSeconds = exerciseSeconds.toString(),
-    restTime = restTime.toString(),
+    restMinutes = restMinutes.toString(),
     numSets = numSets.toString()
 )

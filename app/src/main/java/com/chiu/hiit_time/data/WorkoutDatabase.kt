@@ -16,7 +16,7 @@ import com.chiu.hiit_time.data.entities.WorkoutExercise
 
 @Database(
     entities = [Exercise::class, Workout::class, WorkoutExercise::class],
-    version = 3,
+    version = 4,
     exportSchema = true,
     autoMigrations = [
         AutoMigration(
@@ -27,6 +27,11 @@ import com.chiu.hiit_time.data.entities.WorkoutExercise
         AutoMigration(
             from = 2,
             to = 3,
+        ),
+        AutoMigration(
+            from = 3,
+            to = 4,
+            spec = WorkoutDatabase.Migration3To4::class
         )
     ]
 )
@@ -37,6 +42,9 @@ abstract class WorkoutDatabase : RoomDatabase() {
 
     @RenameColumn(tableName = "exercises", fromColumnName = "exercise_rep_length", toColumnName = "exercise_rep_hours")
     class Migration2To3 : AutoMigrationSpec
+
+    @RenameColumn(tableName = "exercises", fromColumnName = "rest_between_reps", toColumnName = "rest_minutes")
+    class Migration3To4 : AutoMigrationSpec
 
     companion object {
         @Volatile
