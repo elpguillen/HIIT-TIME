@@ -46,9 +46,9 @@ fun ExercisesScreen(
 ) {
 
     val exercises: List<Exercise> = listOf(
-        Exercise(1, "squats", 1000, 1000, 5, 1, 2),
-        Exercise(2, "lunge", 2000, 1000, 10, 1, 2),
-        Exercise(3, "hip thrust", 3000, 1000, 15, 3, 4)
+        Exercise(1, "squats", 1000, 1000, 5, 1, 2,5),
+        Exercise(2, "lunge", 2000, 1000, 10, 1, 2, 5),
+        Exercise(3, "hip thrust", 3000, 1000, 15, 3, 4, 2)
     )
 
     Scaffold(
@@ -139,7 +139,7 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewExerciseItem() {
-    val exercise = Exercise(1, "squats", 100, 50, 50, 5, 3)
+    val exercise = Exercise(1, "squats", 100, 50, 50, 5, 3, 1)
     HIITTIMETheme {
         ExerciseItem(exercise = exercise)
     }
@@ -148,8 +148,8 @@ fun PreviewExerciseItem() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewExercisesBody() {
-    val squats = Exercise(1, "squats", 1,1,1, 2, 3)
-    val hiit = Exercise(2,"hiit", 2000, 200, 1, 6, 1)
+    val squats = Exercise(1, "squats", 1,1,1, 2, 3, 5)
+    val hiit = Exercise(2,"hiit", 2000, 200, 1, 6, 1, 5)
 
     HIITTIMETheme {
         ExercisesBody(exercises = listOf(squats, hiit), onItemClick = {})

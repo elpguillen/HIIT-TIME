@@ -59,6 +59,7 @@ data class ExerciseDetails(
     val exerciseMinutes: String = "",
     val exerciseSeconds: String = "",
     val restMinutes: String = "",
+    val restSeconds: String = "",
     val numSets: String = ""
 )
 
@@ -73,6 +74,7 @@ fun ExerciseDetails.toExercise() : Exercise = Exercise(
     exerciseMinutes = exerciseMinutes.toIntOrNull() ?: 0,
     exerciseSeconds = exerciseSeconds.toIntOrNull() ?: 0,
     restMinutes = restMinutes.toIntOrNull() ?: 0,
+    restSeconds = restSeconds.toIntOrNull() ?: 0,
     numSets = numSets.toIntOrNull() ?: 0
 )
 
@@ -83,5 +85,6 @@ fun Exercise.toExerciseDetails(): ExerciseDetails = ExerciseDetails(
     exerciseMinutes = exerciseMinutes.toString(),
     exerciseSeconds = exerciseSeconds.toString(),
     restMinutes = restMinutes.toString(),
+    restSeconds = restSeconds.toString(),
     numSets = numSets.toString()
 )

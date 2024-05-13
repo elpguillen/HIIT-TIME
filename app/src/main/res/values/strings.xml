@@ -8,6 +8,7 @@
     <string name="exercise_name_label">Exercise Name*</string>
     <string name="exercise_rep_amount_label"># Reps*</string>
     <string name="exercise_rest_minutes_label">Rest Minutes*</string>
+    <string name="exercise_rest_seconds_label">Rest Seconds*</string>
     <string name="exercise_seconds_label">Exercise Seconds*</string>
     <string name="exercise_title">Exercises</string>
     <string name="route_home">home</string>

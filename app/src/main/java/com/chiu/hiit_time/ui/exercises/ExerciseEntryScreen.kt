@@ -176,6 +176,19 @@ fun ExerciseInputForm(
         )
 
         OutlinedTextField(
+            value = exerciseDetails.restSeconds,
+            onValueChange = { onValueChange(exerciseDetails.copy(restSeconds = it))},
+            label = { Text(text = stringResource(id = R.string.exercise_rest_seconds_label))},
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            singleLine = true,
+            enabled = enabled
+        )
+
+        OutlinedTextField(
             value = exerciseDetails.numSets,
             onValueChange = { onValueChange(exerciseDetails.copy(numSets = it))},
             label = { Text(text = stringResource(id = R.string.exercise_rep_amount_label))},

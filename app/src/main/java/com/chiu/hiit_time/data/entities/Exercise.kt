@@ -16,6 +16,7 @@ data class Exercise(
     @ColumnInfo(name = "exercise_rep_hours") val exerciseHours: Int,
     @ColumnInfo(name = "exercise_rep_minutes", defaultValue = "0") val exerciseMinutes: Int,
     @ColumnInfo(name = "exercise_rep_seconds", defaultValue = "0") val exerciseSeconds: Int,
-    @ColumnInfo(name = "rest_minutes") val restMinutes: Int, // time in ms
+    @ColumnInfo(name = "rest_minutes") val restMinutes: Int,
+    @ColumnInfo(name = "rest_seconds", defaultValue = "0") val restSeconds: Int,
     @ColumnInfo(name = "number_sets") val numSets: Int
 )
