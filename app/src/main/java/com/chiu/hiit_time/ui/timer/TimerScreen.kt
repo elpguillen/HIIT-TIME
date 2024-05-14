@@ -8,17 +8,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReusableComposition
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
+import com.chiu.hiit_time.R
 import com.chiu.hiit_time.ui.AppViewModelProvider
+import com.chiu.hiit_time.ui.navigation.NavigationDestination
 
+object TimerDestination : NavigationDestination {
+    override val route = "timer"
+    override val titleRes = R.string.timer_title
+}
 @Composable
 fun TimerScreen(
-    modifier: Modifier,
-    viewModel: ViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
+    modifier: Modifier
 ) {
     Column(
         verticalArrangement = Arrangement.Top,

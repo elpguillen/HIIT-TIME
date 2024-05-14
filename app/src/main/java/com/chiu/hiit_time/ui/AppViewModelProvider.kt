@@ -8,6 +8,7 @@ import com.chiu.hiit_time.WorkoutApplication
 import com.chiu.hiit_time.ui.exercises.ExerciseEntryViewModel
 import com.chiu.hiit_time.ui.exercises.ExercisesViewModel
 import com.chiu.hiit_time.ui.home.HomeViewModel
+import com.chiu.hiit_time.ui.timer.TimerViewModel
 
 /**
  * Provides Factory to create instance of ViewModel for the entire app
@@ -25,6 +26,10 @@ object AppViewModelProvider {
 
         initializer {
             ExerciseEntryViewModel(workoutApplication().container.exerciseRepository)
+        }
+
+        initializer {
+            TimerViewModel()
         }
     }
 }
