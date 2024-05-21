@@ -2,6 +2,7 @@ package com.chiu.hiit_time.ui.timer
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -31,12 +32,12 @@ fun TimerScreen(
     modifier: Modifier
 ) {
     Column(
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
     ) {
-        CountDownTimer(0, 2, 30)
+        CountDownTimer(0, 2, 30, "Burpees")
     }
 }
 
@@ -45,7 +46,8 @@ fun TimerScreen(
 fun CountDownTimer(
     hours: Int,
     minutes: Int,
-    seconds: Int
+    seconds: Int,
+    exercise: String
 ) {
 
     var timeLeft by remember {
@@ -64,17 +66,22 @@ fun CountDownTimer(
     }
 
     Text(
-        text = formatSecondsToTime(timeLeft),
-        fontSize = 96.sp,
-        modifier = Modifier.padding(top = 192.dp, bottom = 144.dp)
+        text = exercise,
+        fontSize = 48.sp,
+        modifier = Modifier.padding(top = 16.dp)
     )
 
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+    Text(
+        text = formatSecondsToTime(timeLeft),
+        fontSize = 96.sp,
+        modifier = Modifier.padding(top = 192.dp, bottom = 176.dp)
+    )
+
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Button(
             onClick = { isTimerRunning = !isTimerRunning },
-            modifier = Modifier.padding(bottom = 16 .dp)
         ) {
             Text(text = if (isTimerRunning) "Resume" else "Pause")
         }
@@ -83,6 +90,12 @@ fun CountDownTimer(
             Text(text = "Restart")
         }
     }
+
+    Text(
+        text = "Next: Switching Lunges",
+        modifier = Modifier.padding(top = 48.dp),
+        fontSize = 32.sp
+    )
 }
 
 fun convertTimesToSeconds(
@@ -115,6 +128,6 @@ fun PreviewTimerScreen() {
         modifier = Modifier
             .fillMaxSize()
     ) {
-        CountDownTimer(0, 30, 30)
+        CountDownTimer(0, 30, 30, "Burpees")
     }
 }
