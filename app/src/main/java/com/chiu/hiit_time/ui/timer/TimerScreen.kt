@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.chiu.hiit_time.R
 import com.chiu.hiit_time.ui.navigation.NavigationDestination
 import kotlinx.coroutines.delay
+import java.util.Locale
 
 object TimerDestination : NavigationDestination {
     override val route = "timer"
@@ -73,7 +74,7 @@ fun CountDownTimer(
 
     Text(
         text = formatSecondsToTime(timeLeft),
-        fontSize = 96.sp,
+        fontSize = 80.sp,
         modifier = Modifier.padding(top = 192.dp, bottom = 176.dp)
     )
 
@@ -116,7 +117,9 @@ fun formatSecondsToTime(
     val numberOfMinutes: Long = ((seconds % 86400) % 3600) / 60
     val numberOfSeconds: Long = ((seconds % 86400) % 3600) % 60
 
-    return "$numberOfHours:$numberOfMinutes:$numberOfSeconds"
+    val formattedTime: String = String.format(Locale.US, "%02d:%02d:%02d", numberOfHours, numberOfMinutes, numberOfSeconds)
+
+    return formattedTime
 }
 
 @Preview(showBackground = true)
