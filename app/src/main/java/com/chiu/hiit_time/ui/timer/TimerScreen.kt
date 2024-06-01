@@ -69,7 +69,7 @@ fun CountDownTimer(
     Text(
         text = exercise,
         fontSize = 48.sp,
-        modifier = Modifier.padding(top = 16.dp)
+        modifier = Modifier.padding(top = 24.dp)
     )
 
     Text(
@@ -117,9 +117,11 @@ fun formatSecondsToTime(
     val numberOfMinutes: Long = ((seconds % 86400) % 3600) / 60
     val numberOfSeconds: Long = ((seconds % 86400) % 3600) % 60
 
-    val formattedTime: String = String.format(Locale.US, "%02d:%02d:%02d", numberOfHours, numberOfMinutes, numberOfSeconds)
-
-    return formattedTime
+    return when {
+        numberOfHours > 0 -> String.format(Locale.US, "%d:%d:%d", numberOfHours, numberOfMinutes, numberOfSeconds)
+        numberOfMinutes > 0 -> String.format(Locale.US, "%d:%d", numberOfMinutes, numberOfSeconds)
+        else -> numberOfSeconds.toString()
+    }
 }
 
 @Preview(showBackground = true)
