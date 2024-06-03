@@ -85,6 +85,7 @@ fun ExercisesBody(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
+            .padding(top = 16.dp)
     ) {
         ExerciseList(
             exercises = exercises,

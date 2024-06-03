@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.chiu.hiit_time.R
 import com.chiu.hiit_time.ui.navigation.NavigationDestination
+import com.chiu.hiit_time.ui.utils.convertTimesToSeconds
+import com.chiu.hiit_time.ui.utils.formatSecondsToTime
 import kotlinx.coroutines.delay
 import java.util.Locale
 
@@ -97,31 +99,6 @@ fun CountDownTimer(
         modifier = Modifier.padding(top = 48.dp),
         fontSize = 32.sp
     )
-}
-
-fun convertTimesToSeconds(
-    hours: Int,
-    minutes: Int,
-    seconds: Int
-): Long {
-    val hoursToSeconds = hours * 3600L
-    val minutesToSeconds = minutes * 60L
-
-    return hoursToSeconds + minutesToSeconds + seconds.toLong()
-}
-
-fun formatSecondsToTime(
-    seconds: Long
-): String {
-    val numberOfHours: Long = (seconds % 86400) / 3600
-    val numberOfMinutes: Long = ((seconds % 86400) % 3600) / 60
-    val numberOfSeconds: Long = ((seconds % 86400) % 3600) % 60
-
-    return when {
-        numberOfHours > 0 -> String.format(Locale.US, "%d:%d:%d", numberOfHours, numberOfMinutes, numberOfSeconds)
-        numberOfMinutes > 0 -> String.format(Locale.US, "%d:%d", numberOfMinutes, numberOfSeconds)
-        else -> numberOfSeconds.toString()
-    }
 }
 
 @Preview(showBackground = true)
