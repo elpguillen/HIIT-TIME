@@ -1,5 +1,6 @@
 package com.chiu.hiit_time.ui.exercises
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -32,6 +36,9 @@ import com.chiu.hiit_time.data.entities.Exercise
 import com.chiu.hiit_time.ui.AppViewModelProvider
 import com.chiu.hiit_time.ui.navigation.NavigationDestination
 import com.chiu.hiit_time.ui.theme.HIITTIMETheme
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.mutableStateListOf
 
 object ExercisesDestination : NavigationDestination {
     override val route = "exercises"
@@ -44,12 +51,35 @@ fun ExercisesScreen(
     navigateToExerciseEntry: () -> Unit,
     viewModel: ExercisesViewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory)
 ) {
-
-    val exercises: List<Exercise> = listOf(
+    val defaultExercises: MutableList<Exercise> = mutableListOf(
         Exercise(1, "squats", 1000, 1000, 5, 1, 2,5),
         Exercise(2, "lunge", 2000, 1000, 10, 1, 2, 5),
         Exercise(3, "hip thrust", 3000, 1000, 15, 3, 4, 2)
     )
+
+    val exercises = remember {
+        mutableStateListOf<Exercise>(
+        )
+    }
+
+    LaunchedEffect(key1 = true) {
+
+        defaultExercises.forEach {exercise ->
+            viewModel.addExercise(exercise)
+            //exercises.add(exercise)
+        }
+
+        viewModel.getAllExercises().collect() { exerciseList ->
+            for (exercise in exerciseList) {
+                Log.d("EXERCISE", exercise.toString())
+                exercises.add(exercise)
+            }
+        }
+
+        defaultExercises.forEach {exercise ->
+            exercises.add(exercise)
+        }
+    }
 
     Scaffold(
         floatingActionButton = {
@@ -75,6 +105,7 @@ fun ExercisesScreen(
         )
     }
 }
+
 
 @Composable
 fun ExercisesBody(
