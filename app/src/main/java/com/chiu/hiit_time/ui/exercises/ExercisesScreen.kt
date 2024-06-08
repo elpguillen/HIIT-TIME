@@ -39,6 +39,8 @@ import com.chiu.hiit_time.ui.theme.HIITTIMETheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateListOf
+import com.chiu.hiit_time.ui.utils.convertTimesToSeconds
+import com.chiu.hiit_time.ui.utils.formatSecondsToTime
 
 object ExercisesDestination : NavigationDestination {
     override val route = "exercises"
@@ -161,8 +163,8 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
             Column(
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(text = "Timer: ${exercise.exerciseHours.toString()}")
-                Text(text = "Break: ${exercise.restMinutes.toString()}")
+                Text(text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}")
+                Text(text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}")
             }
         }
     }
