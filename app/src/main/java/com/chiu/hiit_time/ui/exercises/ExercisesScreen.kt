@@ -3,8 +3,10 @@ package com.chiu.hiit_time.ui.exercises
 import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -39,6 +41,7 @@ import com.chiu.hiit_time.ui.theme.HIITTIMETheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import com.chiu.hiit_time.ui.utils.convertTimesToSeconds
 import com.chiu.hiit_time.ui.utils.formatSecondsToTime
 
@@ -145,6 +148,48 @@ fun ExerciseList(exercises: List<Exercise>, onItemClick: (Exercise) -> Unit, mod
 @Composable
 fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
     Card(
+        modifier = modifier
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(text = exercise.exerciseName)
+            }
+            Box {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column(
+
+                    ) {
+                        Text(text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}")
+                        Text(text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}")
+                    }
+                    Column(
+                        
+                    ) {
+                        Text(text = "Sets: ${exercise.numSets}")
+                    }
+                    Column {
+                        Text(text = "Edit")
+                        Text(text = "Delete")
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*
+@Composable
+fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
+    Card(
         modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -169,6 +214,7 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
         }
     }
 }
+*/
 
 @Preview(showBackground = true)
 @Composable
