@@ -1,6 +1,8 @@
 package com.chiu.hiit_time.ui.exercises
 
 import android.util.Log
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +21,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -41,7 +44,9 @@ import com.chiu.hiit_time.ui.theme.HIITTIMETheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
+import androidx.compose.ui.res.painterResource
 import com.chiu.hiit_time.ui.utils.convertTimesToSeconds
 import com.chiu.hiit_time.ui.utils.formatSecondsToTime
 
@@ -153,32 +158,55 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(dimensionResource(id = R.dimen.padding_medium))
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp)
             ) {
                 Text(text = exercise.exerciseName)
             }
             Box {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column(
-
+                        modifier = Modifier
                     ) {
-                        Text(text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}")
-                        Text(text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}")
+                        Text(
+                            text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}",
+                            modifier = Modifier
+                                .padding(bottom = 24.dp)
+                        )
+                        Text(
+                            text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}",
+                            modifier = Modifier
+                                .padding(bottom = 8.dp)
+                        )
                     }
                     Column(
-                        
+                        modifier = Modifier
                     ) {
                         Text(text = "Sets: ${exercise.numSets}")
                     }
                     Column {
-                        Text(text = "Edit")
-                        Text(text = "Delete")
+                        IconButton(onClick = { }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_edit),
+                                contentDescription = "Edit"
+                            )
+                        }
+
+                        IconButton(onClick = { }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_delete),
+                                contentDescription = "Delete"
+                            )
+                        }
                     }
                 }
             }
