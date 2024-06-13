@@ -76,12 +76,10 @@ fun ExercisesScreen(
 
         defaultExercises.forEach {exercise ->
             viewModel.addExercise(exercise)
-            //exercises.add(exercise)
         }
 
         viewModel.getAllExercises().collect() { exerciseList ->
             for (exercise in exerciseList) {
-                Log.d("EXERCISE", exercise.toString())
                 exercises.add(exercise)
             }
         }
@@ -160,89 +158,73 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .padding(dimensionResource(id = R.dimen.padding_medium))
         ) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp)
-            ) {
-                Text(text = exercise.exerciseName)
-            }
-            Box {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(
-                        modifier = Modifier
-                    ) {
-                        Text(
-                            text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}",
-                            modifier = Modifier
-                                .padding(bottom = 24.dp)
-                        )
-                        Text(
-                            text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}",
-                            modifier = Modifier
-                                .padding(bottom = 8.dp)
-                        )
-                    }
-                    Column(
-                        modifier = Modifier
-                    ) {
-                        Text(text = "Sets: ${exercise.numSets}")
-                    }
-                    Column {
-                        IconButton(onClick = { }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_edit),
-                                contentDescription = "Edit"
-                            )
-                        }
-
-                        IconButton(onClick = { }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_delete),
-                                contentDescription = "Delete"
-                            )
-                        }
-                    }
-                }
-            }
+            ExerciseItemTitle(exercise = exercise)
+            ExerciseItemBody(exercise = exercise)
         }
     }
 }
 
-/*
 @Composable
-fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
-    Card(
-        modifier = modifier,
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+fun ExerciseItemTitle(
+    exercise: Exercise,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
     ) {
-        Row(
+        Text(text = exercise.exerciseName)
+    }
+}
+
+@Composable
+fun ExerciseItemBody(
+    exercise: Exercise,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_large))
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = exercise.exerciseName)
+            Text(
+                text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}",
+                modifier = Modifier
+                    .padding(bottom = 24.dp)
+            )
+            Text(
+                text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}",
+                modifier = Modifier
+                    .padding(bottom = 8.dp)
+            )
+        }
+        Column(
+            modifier = Modifier
+        ) {
+            Text(text = "Sets: ${exercise.numSets}")
+        }
+        Column {
+            IconButton(onClick = { }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_edit),
+                    contentDescription = "Edit"
+                )
             }
-            Column(
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}")
-                Text(text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}")
+
+            IconButton(onClick = { }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_delete),
+                    contentDescription = "Delete"
+                )
             }
         }
     }
 }
-*/
 
 @Preview(showBackground = true)
 @Composable
