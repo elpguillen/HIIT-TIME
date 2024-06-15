@@ -156,7 +156,7 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(dimensionResource(id = R.dimen.padding_medium))
+                .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
         ) {
             ExerciseItemTitle(exercise = exercise)
             ExerciseItemBody(exercise = exercise)
@@ -173,7 +173,6 @@ fun ExerciseItemTitle(
         horizontalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 8.dp)
     ) {
         Text(text = exercise.exerciseName)
     }
@@ -195,18 +194,23 @@ fun ExerciseItemBody(
             Text(
                 text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}",
                 modifier = Modifier
-                    .padding(bottom = 24.dp)
+                    .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
+
             )
             Text(
                 text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}",
                 modifier = Modifier
-                    .padding(bottom = 8.dp)
+
             )
         }
         Column(
             modifier = Modifier
         ) {
-            Text(text = "Sets: ${exercise.numSets}")
+            Text(
+                text = "Sets: ${exercise.numSets}",
+                modifier = Modifier
+                    .padding(end = dimensionResource(id = R.dimen.padding_extra_large))
+            )
         }
         Column {
             IconButton(onClick = { }) {
