@@ -21,8 +21,8 @@ fun formatSecondsToTime(
     val numberOfSeconds: Long = ((seconds % 86400) % 3600) % 60
 
     return when {
-        numberOfHours > 0 -> String.format(Locale.US, "%d:%d:%d", numberOfHours, numberOfMinutes, numberOfSeconds)
-        numberOfMinutes > 0 -> String.format(Locale.US, "%d:%d", numberOfMinutes, numberOfSeconds)
+        numberOfHours > 0 -> String.format(Locale.US, "%dh:%dm:%ds", numberOfHours, numberOfMinutes, numberOfSeconds)
+        numberOfMinutes > 0 -> String.format(Locale.US, "%dm:%ds", numberOfMinutes, numberOfSeconds)
         else -> numberOfSeconds.toString()
     }
 }
