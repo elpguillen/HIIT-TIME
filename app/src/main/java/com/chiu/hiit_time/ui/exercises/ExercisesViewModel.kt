@@ -20,4 +20,8 @@ class ExercisesViewModel(
     suspend fun getAllExercises(): Flow<List<Exercise>> {
         return exerciseRepo.getAllExercisesStream()
     }
+
+    suspend fun deleteExercise(exercise: Exercise) {
+        exerciseRepo.deleteExercise(exercise)
+    }
 }
