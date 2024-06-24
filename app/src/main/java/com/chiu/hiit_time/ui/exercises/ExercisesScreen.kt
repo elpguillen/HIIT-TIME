@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -25,6 +26,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -228,6 +230,30 @@ fun ExerciseItemBody(
             }
         }
     }
+}
+
+@Composable
+private fun DeleteConfirmationDialog(
+    onDeleteConfirm: () -> Unit,
+    onDeleteCancel: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    AlertDialog(
+        title = { Text(text = stringResource(id = R.string.delete_confirmation_alert)) },
+        text = { Text(text = stringResource(id = R.string.delete_confirmation_question)) },
+        modifier = modifier,
+        onDismissRequest = { /* Do nothing*/ },
+        confirmButton = {
+            TextButton(onClick = { onDeleteConfirm() }) {
+                Text(text = stringResource(id = R.string.yes))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDeleteCancel() }) {
+                Text(text = stringResource(id = R.string.no))
+            }
+        }
+    )
 }
 
 @Preview(showBackground = true)

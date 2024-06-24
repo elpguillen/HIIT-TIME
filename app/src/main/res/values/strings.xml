@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">HIIT-TIME</string>
     <string name="back_button">Back</string>
+    <string name="delete_confirmation_alert">Attention</string>
+    <string name="delete_confirmation_question">Are you sure you want to delete?</string>
     <string name="exercise_entry_title">Add Exercise</string>
     <string name="exercise_duration_label">Exercise Duration*</string>
     <string name="exercise_hours_label">Exercise Hours*</string>
@@ -11,8 +13,10 @@
     <string name="exercise_rest_seconds_label">Rest Seconds*</string>
     <string name="exercise_seconds_label">Exercise Seconds*</string>
     <string name="exercise_title">Exercises</string>
+    <string name="no">No</string>
     <string name="route_home">home</string>
     <string name="route_exercises">exercises</string>
     <string name="save_action_button">Save</string>
     <string name="timer_title">Timer</string>
+    <string name="yes">Yes</string>
 </resources>
