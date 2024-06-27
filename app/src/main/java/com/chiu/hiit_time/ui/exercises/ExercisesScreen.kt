@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -46,6 +47,9 @@ import com.chiu.hiit_time.ui.theme.HIITTIMETheme
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
@@ -161,7 +165,7 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
         ) {
             ExerciseItemTitle(exercise = exercise)
-            ExerciseItemBody(exercise = exercise)
+            ExerciseItemBody(exercise = exercise, {})
         }
     }
 }
@@ -183,8 +187,13 @@ fun ExerciseItemTitle(
 @Composable
 fun ExerciseItemBody(
     exercise: Exercise,
+    onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var  deleteConfirmationRequired by rememberSaveable {
+        mutableStateOf(false)
+    }
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -222,13 +231,23 @@ fun ExerciseItemBody(
                 )
             }
 
-            IconButton(onClick = { }) {
+            IconButton(onClick = { deleteConfirmationRequired = true }) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_delete),
                     contentDescription = "Delete"
                 )
             }
         }
+    }
+
+    if (deleteConfirmationRequired) {
+        DeleteConfirmationDialog(
+            onDeleteConfirm = {
+                deleteConfirmationRequired = false
+                onDelete()
+            },
+            onDeleteCancel = { deleteConfirmationRequired = false }
+        )
     }
 }
 
