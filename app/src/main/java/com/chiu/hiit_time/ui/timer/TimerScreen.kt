@@ -24,7 +24,6 @@ import com.chiu.hiit_time.ui.navigation.NavigationDestination
 import com.chiu.hiit_time.ui.utils.convertTimesToSeconds
 import com.chiu.hiit_time.ui.utils.formatSecondsToTime
 import kotlinx.coroutines.delay
-import java.util.Locale
 
 object TimerDestination : NavigationDestination {
     override val route = "timer"

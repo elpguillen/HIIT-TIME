@@ -1,7 +1,6 @@
 package com.chiu.hiit_time.data.repositories
 
 import com.chiu.hiit_time.data.dao.WorkoutDao
-import com.chiu.hiit_time.data.entities.Exercise
 import com.chiu.hiit_time.data.entities.Workout
 import kotlinx.coroutines.flow.Flow
 

@@ -1,6 +1,5 @@
 package com.chiu.hiit_time.data.repositories
 
-import com.chiu.hiit_time.data.dao.ExerciseDao
 import com.chiu.hiit_time.data.dao.WorkoutExerciseDao
 import com.chiu.hiit_time.data.entities.WorkoutExercise
 
