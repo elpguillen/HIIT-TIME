@@ -226,7 +226,7 @@ fun ExerciseItemBody(
         Column {
             IconButton(onClick = { }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_edit),
+                    painter = painterResource(id = R.drawable.ic_add),
                     contentDescription = "Edit"
                 )
             }
