@@ -192,24 +192,32 @@ fun ExerciseItemBody(
             Text(
                 text = "Timer: ${formatSecondsToTime(convertTimesToSeconds(exercise.exerciseHours, exercise.exerciseMinutes, exercise.exerciseSeconds))}",
                 modifier = Modifier
-                    .padding(bottom = dimensionResource(id = R.dimen.padding_medium))
+
 
             )
             Text(
                 text = "Break: ${formatSecondsToTime(convertTimesToSeconds(0, exercise.restMinutes, exercise.restSeconds))}",
                 modifier = Modifier
 
+
             )
-        }
-        Column(
-            modifier = Modifier
-        ) {
             Text(
                 text = "Sets: ${exercise.numSets}",
                 modifier = Modifier
-                    .padding(end = dimensionResource(id = R.dimen.padding_extra_large))
             )
         }
+
+        Column(
+            modifier = Modifier
+        ) {
+            IconButton(onClick = { }) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_play),
+                    contentDescription = "Start"
+                )
+            }
+        }
+
         Column {
             IconButton(onClick = { }) {
                 Icon(
