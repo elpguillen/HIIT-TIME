@@ -26,6 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -42,6 +43,9 @@ import com.chiu.hiit_time.ui.navigation.NavigationDestination
 import com.chiu.hiit_time.ui.theme.HIITTIMETheme
 import com.chiu.hiit_time.ui.utils.convertTimesToSeconds
 import com.chiu.hiit_time.ui.utils.formatSecondsToTime
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 object ExercisesDestination : NavigationDestination {
     override val route = "exercises"
@@ -64,6 +68,8 @@ fun ExercisesScreen(
         mutableStateListOf<Exercise>(
         )
     }
+
+    val coroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(key1 = true) {
 
@@ -100,6 +106,8 @@ fun ExercisesScreen(
         ExercisesBody(
             exercises = exercises,
             onItemClick = {},
+            coroutineScope = coroutineScope,
+            viewModel = viewModel,
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
@@ -112,6 +120,8 @@ fun ExercisesScreen(
 fun ExercisesBody(
     exercises: List<Exercise>,
     onItemClick: (Int) -> Unit,
+    coroutineScope: CoroutineScope,
+    viewModel: ExercisesViewModel,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -122,17 +132,30 @@ fun ExercisesBody(
         ExerciseList(
             exercises = exercises,
             onItemClick = { onItemClick(it.id) },
+            coroutineScope = coroutineScope,
+            viewModel = viewModel,
             modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
         )
     }
 }
 
 @Composable
-fun ExerciseList(exercises: List<Exercise>, onItemClick: (Exercise) -> Unit, modifier: Modifier = Modifier) {
+fun ExerciseList(
+    exercises: List<Exercise>,
+    onItemClick: (Exercise) -> Unit,
+    coroutineScope: CoroutineScope,
+    viewModel: ExercisesViewModel,
+    modifier: Modifier = Modifier)
+{
     LazyColumn(modifier = modifier) {
         items(items = exercises, key = {it.id}) {item: Exercise ->
             ExerciseItem(
                 exercise = item,
+                onDelete = {
+                    coroutineScope.launch {
+                        viewModel.deleteExercise(item)
+                    }
+                },
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
                     .clickable { }
@@ -142,7 +165,11 @@ fun ExerciseList(exercises: List<Exercise>, onItemClick: (Exercise) -> Unit, mod
 }
 
 @Composable
-fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
+fun ExerciseItem(
+    exercise: Exercise,
+    onDelete: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Card(
         modifier = modifier
     ) {
@@ -152,7 +179,12 @@ fun ExerciseItem(exercise: Exercise, modifier: Modifier = Modifier) {
                 .padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
         ) {
             ExerciseItemTitle(exercise = exercise)
-            ExerciseItemBody(exercise = exercise, {})
+            ExerciseItemBody(
+                exercise = exercise,
+                onDelete = {
+                    onDelete()
+                }
+            )
         }
     }
 }
@@ -275,7 +307,7 @@ private fun DeleteConfirmationDialog(
 fun PreviewExerciseItem() {
     val exercise = Exercise(1, "squats", 100, 50, 50, 5, 3, 1)
     HIITTIMETheme {
-        ExerciseItem(exercise = exercise)
+        ExerciseItem(exercise = exercise, onDelete = {} )
     }
 }
 
@@ -286,6 +318,6 @@ fun PreviewExercisesBody() {
     val hiit = Exercise(2,"hiit", 2000, 200, 1, 6, 1, 5)
 
     HIITTIMETheme {
-        ExercisesBody(exercises = listOf(squats, hiit), onItemClick = {})
+        ExercisesBody(exercises = listOf(squats, hiit), coroutineScope = rememberCoroutineScope(), viewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory), onItemClick = {})
     }
 }
