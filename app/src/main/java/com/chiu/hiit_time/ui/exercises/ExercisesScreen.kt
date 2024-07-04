@@ -106,8 +106,6 @@ fun ExercisesScreen(
         ExercisesBody(
             exercises = exercises,
             onItemClick = {},
-            coroutineScope = coroutineScope,
-            viewModel = viewModel,
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
@@ -120,8 +118,6 @@ fun ExercisesScreen(
 fun ExercisesBody(
     exercises: List<Exercise>,
     onItemClick: (Int) -> Unit,
-    coroutineScope: CoroutineScope,
-    viewModel: ExercisesViewModel,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -132,8 +128,6 @@ fun ExercisesBody(
         ExerciseList(
             exercises = exercises,
             onItemClick = { onItemClick(it.id) },
-            coroutineScope = coroutineScope,
-            viewModel = viewModel,
             modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
         )
     }
@@ -143,19 +137,12 @@ fun ExercisesBody(
 fun ExerciseList(
     exercises: List<Exercise>,
     onItemClick: (Exercise) -> Unit,
-    coroutineScope: CoroutineScope,
-    viewModel: ExercisesViewModel,
     modifier: Modifier = Modifier)
 {
     LazyColumn(modifier = modifier) {
         items(items = exercises, key = {it.id}) {item: Exercise ->
             ExerciseItem(
                 exercise = item,
-                onDelete = {
-                    coroutineScope.launch {
-                        viewModel.deleteExercise(item)
-                    }
-                },
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.padding_small))
                     .clickable { }
@@ -167,7 +154,6 @@ fun ExerciseList(
 @Composable
 fun ExerciseItem(
     exercise: Exercise,
-    onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -182,7 +168,7 @@ fun ExerciseItem(
             ExerciseItemBody(
                 exercise = exercise,
                 onDelete = {
-                    onDelete()
+
                 }
             )
         }
@@ -307,7 +293,7 @@ private fun DeleteConfirmationDialog(
 fun PreviewExerciseItem() {
     val exercise = Exercise(1, "squats", 100, 50, 50, 5, 3, 1)
     HIITTIMETheme {
-        ExerciseItem(exercise = exercise, onDelete = {} )
+        ExerciseItem(exercise = exercise)
     }
 }
 
@@ -318,6 +304,6 @@ fun PreviewExercisesBody() {
     val hiit = Exercise(2,"hiit", 2000, 200, 1, 6, 1, 5)
 
     HIITTIMETheme {
-        ExercisesBody(exercises = listOf(squats, hiit), coroutineScope = rememberCoroutineScope(), viewModel = androidx.lifecycle.viewmodel.compose.viewModel(factory = AppViewModelProvider.Factory), onItemClick = {})
+        ExercisesBody(exercises = listOf(squats, hiit), onItemClick = {})
     }
 }
