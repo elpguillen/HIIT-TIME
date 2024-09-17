@@ -56,7 +56,7 @@ fun HomeScreen(
         }
     ) {innerPadding ->
         HomeBody(
-            menuList = listOf("Timer", "Exercises", "Workouts"),
+            menuList = listOf("Timer", "Exercises", "Workouts", "Main", "List"),
             onItemClick = navigateToItemScreen,
             modifier = Modifier
                 .padding(innerPadding)
